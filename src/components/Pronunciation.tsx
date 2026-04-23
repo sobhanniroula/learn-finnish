@@ -112,7 +112,7 @@ Provide a brief 1-2 sentence feedback on what they did well and one thing to imp
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 bg-indigo-500/10 blur-3xl rounded-full pointer-events-none" />
 
         <div className="relative z-10 mb-12">
-          <span className="text-xs font-bold tracking-widest text-[#003580] uppercase mb-4 block border border-[#003580]/50 rounded-full px-3 py-1 inline-block bg-[#003580]/10">
+          <span className="text-xs font-bold tracking-widest text-[#003580] uppercase mb-4 block border border-[#003580]/50 rounded-full px-3 py-1 bg-[#003580]/10">
             Target Phrase
           </span>
           <h3 className="text-4xl md:text-5xl font-bold text-white italic">

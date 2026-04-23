@@ -97,7 +97,7 @@ export function Dashboard({
       </div>
 
       {/* Hero section */}
-      <div className="bg-gradient-to-br from-[#1E293B] to-[#0F172A] p-8 rounded-[32px] border border-slate-700 shadow-2xl flex items-center justify-between mb-10 overflow-hidden relative">
+      <div className="bg-linear-to-br from-[#1E293B] to-[#0F172A] p-8 rounded-4xl border border-slate-700 shadow-2xl flex items-center justify-between mb-10 overflow-hidden relative">
         <div className="max-w-[70%] relative z-10">
           <span className="px-3 py-1 bg-blue-500/10 text-blue-400 text-xs font-bold rounded-full border border-blue-500/20 uppercase tracking-widest">
             Current Unit

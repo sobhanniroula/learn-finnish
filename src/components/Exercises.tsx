@@ -76,7 +76,7 @@ export function Exercises() {
         <span>Score: {score}</span>
       </div>
 
-      <div className="bg-[#1E232B] p-8 md:p-12 rounded-[32px] border border-slate-700 mb-8 shadow-2xl">
+      <div className="bg-[#1E232B] p-8 md:p-12 rounded-4xl border border-slate-700 mb-8 shadow-2xl">
         <h2 className="text-2xl md:text-3xl font-bold text-white mb-8 text-center">
           {exercise.question}
         </h2>
