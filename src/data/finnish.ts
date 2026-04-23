@@ -1,30 +1,5 @@
-export const vocabulary = [
-  { id: 1, finnish: "Moi", english: "Hello", category: "Greetings" },
-  { id: 2, finnish: "Kiitos", english: "Thank you", category: "Basics" },
-  {
-    id: 3,
-    finnish: "Ole hyvä",
-    english: "You are welcome",
-    category: "Basics",
-  },
-  {
-    id: 4,
-    finnish: "Hyvää huomenta",
-    english: "Good morning",
-    category: "Greetings",
-  },
-  { id: 5, finnish: "Näkemiin", english: "Goodbye", category: "Greetings" },
-  { id: 6, finnish: "Yksi", english: "One", category: "Numbers" },
-  { id: 7, finnish: "Kaksi", english: "Two", category: "Numbers" },
-  { id: 8, finnish: "Kyllä", english: "Yes", category: "Basics" },
-  { id: 9, finnish: "Ei", english: "No", category: "Basics" },
-  {
-    id: 10,
-    finnish: "Mitä kuuluu?",
-    english: "How are you?",
-    category: "Greetings",
-  },
-];
+import { vocabulary } from "./vocabulary-generated";
+export { vocabulary };
 
 export const exercises = [
   {

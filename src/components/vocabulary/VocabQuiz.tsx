@@ -10,7 +10,7 @@ export function VocabQuiz({ onBack }: { onBack: () => void }) {
   const [round, setRound] = useState(1);
   const [words, setWords] = useState(() => shuffle(vocabulary));
   const [options, setOptions] = useState<string[][]>(() =>
-    words.map((w) => buildQuizOptions(w.english)),
+    words.map((w) => buildQuizOptions(w.english, w.category)),
   );
   const [idx, setIdx] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
@@ -41,7 +41,7 @@ export function VocabQuiz({ onBack }: { onBack: () => void }) {
   const nextRound = () => {
     const newWords = shuffle(vocabulary);
     setWords(newWords);
-    setOptions(newWords.map((w) => buildQuizOptions(w.english)));
+    setOptions(newWords.map((w) => buildQuizOptions(w.english, w.category)));
     setRound((r) => r + 1);
     setIdx(0);
     setSelected(null);
