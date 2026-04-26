@@ -14,7 +14,7 @@ export function TypeYourself({ onBack }: { onBack: () => void }) {
   const [result, setResult] = useState<"correct" | "wrong" | null>(null);
   const [score, setScore] = useState(0);
   const [roundScore, setRoundScore] = useState<number | null>(null);
-  const addXp = useAppStore((s) => s.addXp);
+  const { addXp, recordWordLearned, markUnknown, unmarkUnknown } = useAppStore();
 
   const word = words[idx];
 
@@ -24,6 +24,10 @@ export function TypeYourself({ onBack }: { onBack: () => void }) {
     if (correct) {
       setScore((s) => s + 1);
       addXp(12);
+      recordWordLearned();
+      unmarkUnknown(word.id);
+    } else {
+      markUnknown(word.id);
     }
   };
 

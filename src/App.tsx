@@ -1,10 +1,19 @@
 import { useState, useEffect } from "react";
-import { Home, BookOpen, BrainCircuit, Mic, Moon, Sun } from "lucide-react";
+import {
+  Home,
+  BookOpen,
+  BrainCircuit,
+  Mic,
+  Moon,
+  Sun,
+  Database,
+} from "lucide-react";
 import { useAppStore } from "./store";
 import { Dashboard } from "./components/Dashboard";
 import { Vocabulary } from "./components/Vocabulary";
 import { Exercises } from "./components/Exercises";
 import { Pronunciation } from "./components/Pronunciation";
+import { PasscodeModal } from "./components/PasscodeModal";
 
 const navItems = [
   { id: "home", label: "Dashboard", icon: Home },
@@ -17,7 +26,8 @@ type TabId = (typeof navItems)[number]["id"];
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<TabId>("home");
-  const { theme, toggleTheme, playToday } = useAppStore();
+  const [showPasscode, setShowPasscode] = useState(false);
+  const { theme, toggleTheme, playToday, isLoggedIn } = useAppStore();
 
   useEffect(() => {
     playToday();
@@ -60,7 +70,14 @@ export default function App() {
           })}
         </div>
 
-        <div className="p-8">
+        <div className="p-8 space-y-3">
+          <button
+            onClick={() => setShowPasscode(true)}
+            className={`w-full flex items-center justify-between px-4 py-3 rounded-xl transition-colors font-medium ${isLoggedIn ? "bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-400 border border-indigo-500/30" : "bg-slate-800 hover:bg-slate-700 text-slate-300"}`}
+          >
+            <span>{isLoggedIn ? "DB Synced" : "Sync to DB"}</span>
+            <Database size={18} />
+          </button>
           <button
             onClick={toggleTheme}
             className="w-full flex items-center justify-between px-4 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 transition-colors text-slate-300 font-medium"
@@ -81,6 +98,12 @@ export default function App() {
             Learn Finnish
           </span>
         </div>
+        <button
+          onClick={() => setShowPasscode(true)}
+          className={`p-2 transition-colors ${isLoggedIn ? "text-indigo-400" : "text-slate-400 hover:text-white active:text-white"}`}
+        >
+          <Database size={22} />
+        </button>
         <button
           onClick={toggleTheme}
           className="text-slate-400 hover:text-white active:text-white transition-colors p-2"
@@ -128,6 +151,9 @@ export default function App() {
           })}
         </div>
       </nav>
+
+      {/* ── PASSCODE MODAL ──────────────────────────────── */}
+      {showPasscode && <PasscodeModal onClose={() => setShowPasscode(false)} />}
     </div>
   );
 }

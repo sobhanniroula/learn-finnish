@@ -18,7 +18,7 @@ export function VocabQuiz({ onBack }: { onBack: () => void }) {
   const [score, setScore] = useState(0);
   const [roundScore, setRoundScore] = useState<number | null>(null);
   const [delay, setDelay] = useState(1200);
-  const addXp = useAppStore((s) => s.addXp);
+  const { addXp, recordWordLearned, markUnknown, unmarkUnknown } = useAppStore();
 
   const word = words[idx];
 
@@ -27,7 +27,13 @@ export function VocabQuiz({ onBack }: { onBack: () => void }) {
     setSelected(opt);
     const isCorrect = opt === word.english;
     const newScore = score + (isCorrect ? 1 : 0);
-    if (isCorrect) addXp(15);
+    if (isCorrect) {
+      addXp(15);
+      recordWordLearned();
+      unmarkUnknown(word.id);
+    } else {
+      markUnknown(word.id);
+    }
     const newDelay = isCorrect
       ? Math.max(300, delay / 2)
       : Math.min(3000, delay * 2.5);

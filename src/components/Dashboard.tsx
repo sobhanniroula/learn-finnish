@@ -1,4 +1,4 @@
-import { Flame, Star } from "lucide-react";
+import { Flame, Star, BookCheck, AlertCircle } from "lucide-react";
 import { motion } from "motion/react";
 import { useAppStore } from "../store";
 
@@ -7,7 +7,7 @@ export function Dashboard({
 }: {
   onNavigate: (tab: string) => void;
 }) {
-  const { xp, level, streak } = useAppStore();
+  const { xp, level, streak, wordsLearnedToday, unknownWordIds } = useAppStore();
 
   const xpForNextLevel = level * 100;
   const progress = ((xp % 100) / 100) * 100;
@@ -68,8 +68,62 @@ export function Dashboard({
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.05 }}
+          className="bg-[#1E232B] p-6 rounded-2xl border border-slate-700 flex items-center space-x-6"
+        >
+          <div className="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
+            <BookCheck size={24} strokeWidth={2.5} />
+          </div>
+          <div className="flex-1">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">
+                Today
+              </span>
+              <span className="text-emerald-400 font-bold">
+                {wordsLearnedToday} words
+              </span>
+            </div>
+            <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+              <div
+                className="bg-emerald-400 h-full transition-all duration-500"
+                style={{ width: `${Math.min(100, (wordsLearnedToday / 50) * 100)}%` }}
+              ></div>
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-[#1E232B] p-6 rounded-2xl border border-slate-700 flex items-center space-x-6 md:col-span-2"
+          className="bg-[#1E232B] p-6 rounded-2xl border border-slate-700 flex items-center space-x-6"
+        >
+          <div className="w-12 h-12 rounded-xl bg-red-500/10 text-red-400 flex items-center justify-center">
+            <AlertCircle size={24} strokeWidth={2.5} />
+          </div>
+          <div className="flex-1">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">
+                To Review
+              </span>
+              <span className="text-red-400 font-bold">
+                {unknownWordIds.length} words
+              </span>
+            </div>
+            <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+              <div
+                className="bg-red-400 h-full transition-all duration-500"
+                style={{ width: unknownWordIds.length > 0 ? `${Math.min(100, (unknownWordIds.length / 100) * 100)}%` : '0%' }}
+              ></div>
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15 }}
+          className="bg-[#1E232B] p-6 rounded-2xl border border-slate-700 flex items-center space-x-6 md:col-span-3"
         >
           <div className="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center shrink-0">
             <Star size={24} strokeWidth={2.5} />
@@ -77,7 +131,7 @@ export function Dashboard({
           <div className="flex-1">
             <div className="flex items-center justify-between mb-2">
               <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">
-                Total XP
+                Total XP — Level {level}
               </span>
               <span className="text-blue-400 font-bold flex items-center">
                 <Star size={16} strokeWidth={2.5} className="mr-1" />
