@@ -5,6 +5,7 @@ import { vocabulary } from "../../data/finnish";
 import { BackBar } from "./BackBar";
 import { RoundComplete } from "./RoundComplete";
 import { shuffle, buildQuizOptions } from "./utils";
+import { SourceBadge } from "./SourceBadge";
 
 export function VocabQuiz({ onBack }: { onBack: () => void }) {
   const [round, setRound] = useState(1);
@@ -16,6 +17,7 @@ export function VocabQuiz({ onBack }: { onBack: () => void }) {
   const [selected, setSelected] = useState<string | null>(null);
   const [score, setScore] = useState(0);
   const [roundScore, setRoundScore] = useState<number | null>(null);
+  const [delay, setDelay] = useState(1200);
   const addXp = useAppStore((s) => s.addXp);
 
   const word = words[idx];
@@ -26,6 +28,10 @@ export function VocabQuiz({ onBack }: { onBack: () => void }) {
     const isCorrect = opt === word.english;
     const newScore = score + (isCorrect ? 1 : 0);
     if (isCorrect) addXp(15);
+    const newDelay = isCorrect
+      ? Math.max(300, delay / 2)
+      : Math.min(3000, delay * 2.5);
+    setDelay(newDelay);
     setTimeout(() => {
       if (idx === words.length - 1) {
         setScore(newScore);
@@ -35,7 +41,7 @@ export function VocabQuiz({ onBack }: { onBack: () => void }) {
         setIdx((i) => i + 1);
         setSelected(null);
       }
-    }, 1200);
+    }, newDelay);
   };
 
   const nextRound = () => {
@@ -47,6 +53,7 @@ export function VocabQuiz({ onBack }: { onBack: () => void }) {
     setSelected(null);
     setScore(0);
     setRoundScore(null);
+    setDelay(1200);
   };
 
   if (roundScore !== null) {
@@ -73,7 +80,8 @@ export function VocabQuiz({ onBack }: { onBack: () => void }) {
         </span>
         <span>Score: {score}</span>
       </div>
-      <div className="bg-[#1E232B] p-6 sm:p-10 rounded-4xl border border-slate-700 shadow-2xl">
+      <div className="relative bg-[#1E232B] p-6 sm:p-10 rounded-4xl border border-slate-700 shadow-2xl">
+        <SourceBadge source={word.source} />
         <p className="text-xs font-bold text-slate-500 uppercase tracking-widest text-center mb-3">
           What does this mean?
         </p>

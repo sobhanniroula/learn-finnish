@@ -1,0 +1,642 @@
+[
+  {
+    "finnish": "aamiainen",
+    "english": "breakfast"
+  },
+  {
+    "finnish": "aamu",
+    "english": "momning"
+  },
+  {
+    "finnish": "aamupala",
+    "english": "breakfast"
+  },
+  {
+    "finnish": "aamupdivi",
+    "english": "morming"
+  },
+  {
+    "finnish": "aamuyd",
+    "english": "early hours"
+  },
+  {
+    "finnish": "ahaa",
+    "english": "oh, I see"
+  },
+  {
+    "finnish": "ai",
+    "english": "jaa okay"
+  },
+  {
+    "finnish": "aika",
+    "english": "quite; time"
+  },
+  {
+    "finnish": "aikataulu",
+    "english": "schedule"
+  },
+  {
+    "finnish": "ajaa",
+    "english": "(to) drive"
+  },
+  {
+    "finnish": "ajo-ohjeet",
+    "english": "driving instructions"
+  },
+  {
+    "finnish": "alakerta",
+    "english": "downstairs"
+  },
+  {
+    "finnish": "alas",
+    "english": "down"
+  },
+  {
+    "finnish": "alkaa",
+    "english": "(to) start"
+  },
+  {
+    "finnish": "alkuruoka",
+    "english": "starter"
+  },
+  {
+    "finnish": "ammatti",
+    "english": "occupation, profession"
+  },
+  {
+    "finnish": "ananas",
+    "english": "pineapple"
+  },
+  {
+    "finnish": "antaa",
+    "english": "(to) give"
+  },
+  {
+    "finnish": "appelsiini",
+    "english": "orange"
+  },
+  {
+    "finnish": "apu",
+    "english": "help"
+  },
+  {
+    "finnish": "arabia",
+    "english": "Arabic"
+  },
+  {
+    "finnish": "arkkitehti",
+    "english": "architect"
+  },
+  {
+    "finnish": "asema",
+    "english": "station"
+  },
+  {
+    "finnish": "asiakas",
+    "english": "client"
+  },
+  {
+    "finnish": "assistentti",
+    "english": "assistant"
+  },
+  {
+    "finnish": "aste",
+    "english": "degree"
+  },
+  {
+    "finnish": "astia",
+    "english": "dish"
+  },
+  {
+    "finnish": "astianpesukone",
+    "english": "dishwasher"
+  },
+  {
+    "finnish": "asua",
+    "english": "(to) live"
+  },
+  {
+    "finnish": "asukas",
+    "english": "resident"
+  },
+  {
+    "finnish": "asunto",
+    "english": "flat, apartment"
+  },
+  {
+    "finnish": "auki",
+    "english": "open"
+  },
+  {
+    "finnish": "aurinko",
+    "english": "sun"
+  },
+  {
+    "finnish": "aurinkoinen",
+    "english": "sunny"
+  },
+  {
+    "finnish": "auto",
+    "english": "car"
+  },
+  {
+    "finnish": "automaatti",
+    "english": "vending machine"
+  },
+  {
+    "finnish": "automekaanikko",
+    "english": "car mechanic"
+  },
+  {
+    "finnish": "autotalli",
+    "english": "garage"
+  },
+  {
+    "finnish": "avain",
+    "english": "key"
+  },
+  {
+    "finnish": "baari",
+    "english": "bar"
+  },
+  {
+    "finnish": "banaani",
+    "english": "banana"
+  },
+  {
+    "finnish": "brasilialainen",
+    "english": "Brazilian"
+  },
+  {
+    "finnish": "bussi",
+    "english": "bus"
+  },
+  {
+    "finnish": "bussikuski",
+    "english": "bus driver"
+  },
+  {
+    "finnish": "disko",
+    "english": "disco"
+  },
+  {
+    "finnish": "edullinen",
+    "english": "affordable"
+  },
+  {
+    "finnish": "eksynyt",
+    "english": "lost"
+  },
+  {
+    "finnish": "elektroniikka",
+    "english": "electronics"
+  },
+  {
+    "finnish": "elokuu",
+    "english": "August"
+  },
+  {
+    "finnish": "elikkeelld",
+    "english": "retired"
+  },
+  {
+    "finnish": "englanniksi",
+    "english": "in English"
+  },
+  {
+    "finnish": "englanti",
+    "english": "English"
+  },
+  {
+    "finnish": "ensimmdinen",
+    "english": "kerros first floor, first storey"
+  },
+  {
+    "finnish": "ensin",
+    "english": "first"
+  },
+  {
+    "finnish": "enti",
+    "english": "what about"
+  },
+  {
+    "finnish": "epikohtelias",
+    "english": "impolite"
+  },
+  {
+    "finnish": "epiiterveellinen",
+    "english": "unhealthy"
+  },
+  {
+    "finnish": "epiystiviillinen",
+    "english": "unfriendly"
+  },
+  {
+    "finnish": "erikseen",
+    "english": "separately"
+  },
+  {
+    "finnish": "eronnut",
+    "english": "divorced"
+  },
+  {
+    "finnish": "esimies",
+    "english": "manager"
+  },
+  {
+    "finnish": "esitelli",
+    "english": "(to) present"
+  },
+  {
+    "finnish": "espanja",
+    "english": "Spanish"
+  },
+  {
+    "finnish": "eteenpiin",
+    "english": "ahead"
+  },
+  {
+    "finnish": "eteinen",
+    "english": "hall"
+  },
+  {
+    "finnish": "eteli",
+    "english": "south"
+  },
+  {
+    "finnish": "paprika (sweet) pepper 8",
+    "english": "puoli half"
+  },
+  {
+    "finnish": "papu bean 8",
+    "english": "puolipilvinen partly cloudy"
+  },
+  {
+    "finnish": "parempi better 4",
+    "english": "puolukka lingonberry"
+  },
+  {
+    "finnish": "parkkipaikka parking space 6",
+    "english": "putkiasentaja plumber"
+  },
+  {
+    "finnish": "parta beard 4",
+    "english": "putkimies plumber"
+  },
+  {
+    "finnish": "parturi barber 9",
+    "english": "puuro porridge"
+  },
+  {
+    "finnish": "parveke balcony 6",
+    "english": "bike"
+  },
+  {
+    "finnish": "pasta pasta 8",
+    "english": "(to) cycle"
+  },
+  {
+    "finnish": "pastasalaatti pasta salad 8",
+    "english": "day"
+  },
+  {
+    "finnish": "pehmei soft 6",
+    "english": "kindergarten"
+  },
+  {
+    "finnish": "perhe family 4",
+    "english": "pairuoka main course"
+  },
+  {
+    "finnish": "perjantai Friday 1",
+    "english": "table"
+  },
+  {
+    "finnish": "persikka",
+    "english": "peach"
+  },
+  {
+    "finnish": "pesuallas sink 6",
+    "english": "raha money"
+  },
+  {
+    "finnish": "pesukone washing machine 6",
+    "english": "raitiovaunu (ratikka) tram, streetcar"
+  },
+  {
+    "finnish": "pian soon 8",
+    "english": "rakastaa (to) love"
+  },
+  {
+    "finnish": "pieni small 3",
+    "english": "rakennus building"
+  },
+  {
+    "finnish": "piha garden, yard 6",
+    "english": "rakennusmies construction worker"
+  },
+  {
+    "finnish": "pihvi steak 8",
+    "english": "Ranska France"
+  },
+  {
+    "finnish": "sour milk 8",
+    "english": "ranskalainen French"
+  },
+  {
+    "finnish": "piirakka pie 8",
+    "english": "rappu stairway"
+  },
+  {
+    "finnish": "pikkusisko little sister 4",
+    "english": "rasvainen fatty"
+  },
+  {
+    "finnish": "pilvinen cloudy 3",
+    "english": "rasvaton fat-free"
+  },
+  {
+    "finnish": "pimei dark 3",
+    "english": "ravintola restaurant"
+  },
+  {
+    "finnish": "pippuri pepper 8",
+    "english": "rekka-auto lorry, truck"
+  },
+  {
+    "finnish": "pitkd tall 4",
+    "english": "rekkakuski trucker"
+  },
+  {
+    "finnish": "pizza pizza 8",
+    "english": "riisi rice"
+  },
+  {
+    "finnish": "pohjoinen north 2",
+    "english": "rikki broken"
+  },
+  {
+    "finnish": "pohjoisnapa North Pole 2",
+    "english": "risteys crossing"
+  },
+  {
+    "finnish": "poika son 4",
+    "english": "ristidiset christening"
+  },
+  {
+    "finnish": "poikaystivi boyfriend 4",
+    "english": "ruisleipid rye bread"
+  },
+  {
+    "finnish": "poliisi police officer 9",
+    "english": "ruma ugly"
+  },
+  {
+    "finnish": "pomo boss. 9",
+    "english": "ruokala canteen"
+  },
+  {
+    "finnish": "porkkana carrot 8",
+    "english": "ruokalista menu"
+  },
+  {
+    "finnish": "portugali Portuguese 2",
+    "english": "ruokapdyti dining table"
+  },
+  {
+    "finnish": "postinjakaja mailman 9",
+    "english": "ruskea brown"
+  },
+  {
+    "finnish": "printteri",
+    "english": "printer"
+  },
+  {
+    "finnish": "puhelias talkative 4",
+    "english": "saada (to) get"
+  },
+  {
+    "finnish": "puhelin telephone 9",
+    "english": "saapua (to) arrive"
+  },
+  {
+    "finnish": "puhelu phone call 9",
+    "english": "saari island"
+  },
+  {
+    "finnish": "puisto park 2",
+    "english": "salaatti salad"
+  },
+  {
+    "finnish": "pulla bun 8",
+    "english": "sama same"
+  },
+  {
+    "finnish": "pullo bottle 8",
+    "english": "saman tien right away"
+  },
+  {
+    "finnish": "punainen red 3",
+    "english": "sandaalit sandals"
+  },
+  {
+    "finnish": "terassi terrace 6",
+    "english": "tyokaveri fellow worker"
+  },
+  {
+    "finnish": "terveellinen healthy 8",
+    "english": "employee"
+  },
+  {
+    "finnish": "terveisin greetings 3",
+    "english": "working day, workday"
+  },
+  {
+    "finnish": "terveisii greetings 3",
+    "english": "office chair"
+  },
+  {
+    "finnish": "tie road 6",
+    "english": "shift"
+  },
+  {
+    "finnish": "tietokone computer 5",
+    "english": "timi this"
+  },
+  {
+    "finnish": "team 9",
+    "english": "here"
+  },
+  {
+    "finnish": "room 4",
+    "english": "here"
+  },
+  {
+    "finnish": "toimisto office 4",
+    "english": "toissid working"
+  },
+  {
+    "finnish": "toimittaja",
+    "english": "journalist, reporter"
+  },
+  {
+    "finnish": "toinen another; second 4",
+    "english": "uima-allas swimming pool"
+  },
+  {
+    "finnish": "toissapiivini day before yesterday 1",
+    "english": "ujo shy"
+  },
+  {
+    "finnish": "toivottavasti hopefully 3",
+    "english": "ukkonen thunder"
+  },
+  {
+    "finnish": "toivotus wish 8",
+    "english": "ulkona outside"
+  },
+  {
+    "finnish": "tomaatti tomato 8",
+    "english": "ulos out"
+  },
+  {
+    "finnish": "torstai Thursday 1",
+    "english": "urdu Urdu"
+  },
+  {
+    "finnish": "torstaisin On Thursdays 3",
+    "english": "uwrheilija athlete"
+  },
+  {
+    "finnish": "tosi very 8",
+    "english": "urheilla (to) be into sports"
+  },
+  {
+    "finnish": "toukokuu May 3",
+    "english": "uusi news"
+  },
+  {
+    "finnish": "tuhat",
+    "english": "thousand I uutiset news"
+  },
+  {
+    "finnish": "tukeva",
+    "english": "sturdy"
+  },
+  {
+    "finnish": "tuleeko muuta anything else 2",
+    "english": "vaalea blonde"
+  },
+  {
+    "finnish": "tulinen hot 8",
+    "english": "vaaleanpunainen pink"
+  },
+  {
+    "finnish": "tulla",
+    "english": "(to) come I vaan but"
+  },
+  {
+    "finnish": "tulostin printer 9",
+    "english": "vaatekaappi wardrobe"
+  },
+  {
+    "finnish": "tumma dark 4",
+    "english": "vadelma raspberry"
+  },
+  {
+    "finnish": "tunti hour 5",
+    "english": "vahtimestari doorman"
+  },
+  {
+    "finnish": "tuo that 6",
+    "english": "vai niin I see"
+  },
+  {
+    "finnish": "tuolla over there 3",
+    "english": "vaimo wife"
+  },
+  {
+    "finnish": "tuore fresh 8",
+    "english": "vain only"
+  },
+  {
+    "finnish": "er 6",
+    "english": "valita (to) choose"
+  },
+  {
+    "finnish": "house-warming party 8",
+    "english": "valkoinen white"
+  },
+  {
+    "finnish": "tuulinen windy 3",
+    "english": "valkosipuli garlic"
+  },
+  {
+    "finnish": "tyhma stupid 5",
+    "english": "valokuva photograph"
+  },
+  {
+    "finnish": "tytté girl 4",
+    "english": "valokuvaaja photographer"
+  },
+  {
+    "finnish": "tyttoystivi girlfriend 4",
+    "english": "vanha old"
+  },
+  {
+    "finnish": "tytir daughter 4",
+    "english": "vanhemmat parents"
+  },
+  {
+    "finnish": "tyytyviinen satisfied 9",
+    "english": "vanilja vanilla"
+  },
+  {
+    "finnish": "tyoaika working hours 9",
+    "english": "vapaa free"
+  },
+  {
+    "finnish": "tyohuone study 6",
+    "english": "varasto stock"
+  },
+  {
+    "finnish": "baby 4",
+    "english": "yhdessi together"
+  },
+  {
+    "finnish": "yet; still 4 ‘",
+    "english": "ystiviillinen friendly"
+  },
+  {
+    "finnish": "guest 8",
+    "english": "yb night"
+  },
+  {
+    "finnish": "guest room 6",
+    "english": "yopyi (to) stay overnight"
+  },
+  {
+    "finnish": "weekend 1",
+    "english": "mother"
+  },
+  {
+    "finnish": "cool 3 1",
+    "english": "dljy oil"
+  },
+  {
+    "finnish": "wine",
+    "english": "glass"
+  },
+  {
+    "finnish": "five",
+    "english": "hundred thousand"
+  },
+  {
+    "finnish": "rental",
+    "english": "flat, rental apartment"
+  },
+  {
+    "finnish": "s et",
+    "english": "2 of"
+  }
+]

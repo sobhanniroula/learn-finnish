@@ -4,6 +4,7 @@ import { CheckCircle2 } from "lucide-react";
 import { useAppStore } from "../../store";
 import { vocabulary } from "../../data/finnish";
 import { BackBar } from "./BackBar";
+import { SourceBadge } from "./SourceBadge";
 
 export function FlashCards({ onBack }: { onBack: () => void }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -81,6 +82,7 @@ export function FlashCards({ onBack }: { onBack: () => void }) {
             className="absolute w-full h-full flex flex-col items-center justify-center bg-[#1E232B] rounded-3xl border border-slate-700 p-6 shadow-2xl"
             style={{ backfaceVisibility: "hidden" }}
           >
+            <SourceBadge source={word.source} />
             <span className="text-xs font-bold text-blue-400 uppercase tracking-widest px-3 py-1 bg-blue-500/10 border border-blue-500/20 rounded-full mb-4">
               {word.category}
             </span>

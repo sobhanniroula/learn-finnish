@@ -4,6 +4,7 @@ import { vocabulary } from "../../data/finnish";
 import { BackBar } from "./BackBar";
 import { RoundComplete } from "./RoundComplete";
 import { shuffle } from "./utils";
+import { SourceBadge } from "./SourceBadge";
 
 export function TypeYourself({ onBack }: { onBack: () => void }) {
   const [round, setRound] = useState(1);
@@ -70,7 +71,8 @@ export function TypeYourself({ onBack }: { onBack: () => void }) {
         </span>
         <span>Score: {score}</span>
       </div>
-      <div className="bg-[#1E232B] p-6 sm:p-8 rounded-4xl border border-slate-700 shadow-2xl">
+      <div className="relative bg-[#1E232B] p-6 sm:p-8 rounded-4xl border border-slate-700 shadow-2xl">
+        <SourceBadge source={word.source} />
         <p className="text-xs font-bold text-slate-500 uppercase tracking-widest text-center mb-3">
           Translate to English
         </p>
