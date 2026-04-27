@@ -112,10 +112,14 @@ export default function App() {
       <nav className="hidden md:flex w-64 flex-col bg-(--bg-nav) border-r border-slate-800 sticky top-0 h-screen shrink-0">
         <div className="p-8 flex items-center space-x-3">
           <div className="w-8 h-8 rounded-lg overflow-hidden shadow-lg shrink-0">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 11" className="w-full h-full">
-              <rect width="18" height="11" fill="#fff"/>
-              <rect x="4" y="0" width="3" height="11" fill="#003580"/>
-              <rect x="0" y="4" width="18" height="3" fill="#003580"/>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 18 11"
+              className="w-full h-full"
+            >
+              <rect width="18" height="11" fill="#fff" />
+              <rect x="4" y="0" width="3" height="11" fill="#003580" />
+              <rect x="0" y="4" width="18" height="3" fill="#003580" />
             </svg>
           </div>
           <span className="text-xl font-semibold tracking-tight text-white">
@@ -168,10 +172,14 @@ export default function App() {
       <div className="md:hidden sticky top-0 z-20 flex items-center justify-between px-4 py-3 bg-(--bg-nav) border-b border-slate-800 shrink-0">
         <div className="flex items-center space-x-3">
           <div className="w-7 h-7 rounded-lg overflow-hidden shadow-lg shrink-0">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 11" className="w-full h-full">
-              <rect width="18" height="11" fill="#fff"/>
-              <rect x="4" y="0" width="3" height="11" fill="#003580"/>
-              <rect x="0" y="4" width="18" height="3" fill="#003580"/>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 18 11"
+              className="w-full h-full"
+            >
+              <rect width="18" height="11" fill="#fff" />
+              <rect x="4" y="0" width="3" height="11" fill="#003580" />
+              <rect x="0" y="4" width="18" height="3" fill="#003580" />
             </svg>
           </div>
           <span className="text-lg font-semibold tracking-tight text-white">
