@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   Home,
   BookOpen,
@@ -10,7 +10,7 @@ import {
   LogIn,
 } from "lucide-react";
 import { useAppStore } from "./store";
-import { getActiveSession, fetchProgress } from "./lib/db";
+import { getActiveSession, fetchProgress, saveProgress } from "./lib/db";
 import { Dashboard } from "./components/Dashboard";
 import { Vocabulary } from "./components/Vocabulary";
 import { Exercises } from "./components/Exercises";
@@ -39,7 +39,53 @@ export default function App() {
     setLoggedIn,
     hydrateFromDb,
     clearSession,
+    xp,
+    level,
+    streak,
+    lastPlayed,
+    wordsLearnedToday,
+    lastActivityDate,
+    dailyLog,
+    unknownWordIds,
   } = useAppStore();
+
+  // Skip the very first render so hydration/session-restore doesn't
+  // immediately fire a write back to the DB with stale local data.
+  const isFirstSync = useRef(true);
+
+  // Auto-sync to DB 2 s after the last progress change.
+  // localStorage is written synchronously by Zustand's persist middleware
+  // on every change, so it always acts as the immediate local copy.
+  useEffect(() => {
+    if (isFirstSync.current) {
+      isFirstSync.current = false;
+      return;
+    }
+    const timer = setTimeout(() => {
+      const s = useAppStore.getState();
+      if (!s.isLoggedIn || !s.userId) return;
+      saveProgress(s.userId, {
+        xp: s.xp,
+        level: s.level,
+        streak: s.streak,
+        lastPlayed: s.lastPlayed,
+        wordsLearnedToday: s.wordsLearnedToday,
+        lastActivityDate: s.lastActivityDate,
+        dailyLog: s.dailyLog,
+        unknownWordIds: s.unknownWordIds,
+      });
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, [
+    xp,
+    level,
+    streak,
+    lastPlayed,
+    wordsLearnedToday,
+    lastActivityDate,
+    dailyLog,
+    unknownWordIds,
+  ]);
 
   useEffect(() => {
     playToday();
