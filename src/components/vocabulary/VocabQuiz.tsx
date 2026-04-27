@@ -18,7 +18,8 @@ export function VocabQuiz({ onBack }: { onBack: () => void }) {
   const [score, setScore] = useState(0);
   const [roundScore, setRoundScore] = useState<number | null>(null);
   const [delay, setDelay] = useState(1200);
-  const { addXp, recordWordLearned, markUnknown, unmarkUnknown } = useAppStore();
+  const { addXp, recordWordLearned, markUnknown, unmarkUnknown } =
+    useAppStore();
 
   const word = words[idx];
 
@@ -28,7 +29,7 @@ export function VocabQuiz({ onBack }: { onBack: () => void }) {
     const isCorrect = opt === word.english;
     const newScore = score + (isCorrect ? 1 : 0);
     if (isCorrect) {
-      addXp(15);
+      addXp(1);
       recordWordLearned();
       unmarkUnknown(word.id);
     } else {
@@ -86,7 +87,7 @@ export function VocabQuiz({ onBack }: { onBack: () => void }) {
         </span>
         <span>Score: {score}</span>
       </div>
-      <div className="relative bg-[#1E232B] p-6 sm:p-10 rounded-4xl border border-slate-700 shadow-2xl">
+      <div className="relative bg-(--bg-card) p-6 sm:p-10 rounded-4xl border border-slate-700 shadow-2xl">
         <SourceBadge source={word.source} />
         <p className="text-xs font-bold text-slate-500 uppercase tracking-widest text-center mb-3">
           What does this mean?
@@ -99,7 +100,7 @@ export function VocabQuiz({ onBack }: { onBack: () => void }) {
             const isSelected = selected === opt;
             const correct = opt === word.english;
             let cls =
-              "bg-[#16191F] hover:bg-slate-800 active:bg-slate-700 text-slate-200 border-slate-800";
+              "bg-(--bg-nav) hover:bg-slate-800 active:bg-slate-700 text-slate-200 border-slate-800";
             if (selected) {
               if (correct)
                 cls =
@@ -108,7 +109,7 @@ export function VocabQuiz({ onBack }: { onBack: () => void }) {
                 cls = "bg-red-500/20 border-red-500/50 text-red-400";
               else
                 cls =
-                  "opacity-40 bg-[#16191F] border-transparent text-slate-500";
+                  "opacity-40 bg-(--bg-nav) border-transparent text-slate-500";
             }
             return (
               <button

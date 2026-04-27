@@ -79,7 +79,7 @@ export function FlashCards({ onBack }: { onBack: () => void }) {
           style={{ transformStyle: "preserve-3d" }}
         >
           <div
-            className="absolute w-full h-full flex flex-col items-center justify-center bg-[#1E232B] rounded-3xl border border-slate-700 p-6 shadow-2xl"
+            className="absolute w-full h-full flex flex-col items-center justify-center bg-(--bg-card) rounded-3xl border border-slate-700 p-6 shadow-2xl"
             style={{ backfaceVisibility: "hidden" }}
           >
             <SourceBadge source={word.source} />
@@ -113,7 +113,7 @@ export function FlashCards({ onBack }: { onBack: () => void }) {
       <div className="mt-6 flex gap-3 w-full max-w-md">
         <button
           onClick={goPrev}
-          className="flex-1 py-4 rounded-2xl font-bold bg-[#16191F] text-slate-300 border border-slate-800 hover:bg-slate-800 active:bg-slate-700 transition"
+          className="flex-1 py-4 rounded-2xl font-bold bg-(--bg-nav) text-slate-300 border border-slate-800 hover:bg-slate-800 active:bg-slate-700 transition"
         >
           Previous
         </button>

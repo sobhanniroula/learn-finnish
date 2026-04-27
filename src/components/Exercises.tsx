@@ -76,7 +76,7 @@ export function Exercises() {
         <span>Score: {score}</span>
       </div>
 
-      <div className="bg-[#1E232B] p-8 md:p-12 rounded-4xl border border-slate-700 mb-8 shadow-2xl">
+      <div className="bg-(--bg-card) p-8 md:p-12 rounded-4xl border border-slate-700 mb-8 shadow-2xl">
         <h2 className="text-2xl md:text-3xl font-bold text-white mb-8 text-center">
           {exercise.question}
         </h2>
@@ -88,7 +88,7 @@ export function Exercises() {
               const isCorrectOption = option === exercise.correctAnswer;
 
               let buttonStyle =
-                "bg-[#16191F] hover:bg-slate-800 text-slate-200 border-slate-800";
+                "bg-(--bg-nav) hover:bg-slate-800 text-slate-200 border-slate-800";
 
               if (selectedOption) {
                 if (isSelected && isCorrect)
@@ -101,7 +101,7 @@ export function Exercises() {
                     "bg-emerald-500/20 border-emerald-500/50 text-emerald-400";
                 else
                   buttonStyle =
-                    "bg-[#16191F] text-slate-600 border-transparent opacity-50";
+                    "bg-(--bg-nav) text-slate-600 border-transparent opacity-50";
               }
 
               return (

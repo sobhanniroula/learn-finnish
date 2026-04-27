@@ -137,7 +137,7 @@ export function VocabularyHub({ onSelect }: { onSelect: (m: Mode) => void }) {
             whileHover={{ y: -4 }}
             whileTap={{ scale: 0.97 }}
             onClick={() => onSelect(f.id)}
-            className="bg-[#16191F] border border-slate-800 hover:border-slate-700 active:border-slate-600 p-5 md:p-6 rounded-3xl text-left flex flex-col gap-4 transition-colors cursor-pointer"
+            className="bg-(--bg-nav) border border-slate-800 hover:border-slate-700 active:border-slate-600 p-5 md:p-6 rounded-3xl text-left flex flex-col gap-4 transition-colors cursor-pointer"
           >
             <div
               className={`w-12 h-12 md:w-14 md:h-14 rounded-2xl border flex items-center justify-center ${f.color}`}

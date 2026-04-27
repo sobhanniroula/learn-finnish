@@ -6,9 +6,11 @@ import {
   Mic,
   Moon,
   Sun,
-  Database,
+  User,
+  LogIn,
 } from "lucide-react";
 import { useAppStore } from "./store";
+import { getActiveSession, fetchProgress } from "./lib/db";
 import { Dashboard } from "./components/Dashboard";
 import { Vocabulary } from "./components/Vocabulary";
 import { Exercises } from "./components/Exercises";
@@ -27,20 +29,48 @@ type TabId = (typeof navItems)[number]["id"];
 export default function App() {
   const [activeTab, setActiveTab] = useState<TabId>("home");
   const [showPasscode, setShowPasscode] = useState(false);
-  const { theme, toggleTheme, playToday, isLoggedIn } = useAppStore();
+  const {
+    theme,
+    toggleTheme,
+    playToday,
+    isLoggedIn,
+    userName,
+    sessionExpiresAt,
+    setLoggedIn,
+    hydrateFromDb,
+    clearSession,
+  } = useAppStore();
 
   useEffect(() => {
     playToday();
     document.documentElement.classList.toggle("dark", theme === "dark");
+
+    // Restore session if within 7-day window
+    if (sessionExpiresAt && sessionExpiresAt > Date.now()) {
+      getActiveSession().then((result) => {
+        if (result) {
+          fetchProgress(result.userId).then((data) => {
+            if (data) hydrateFromDb(data);
+            setLoggedIn(result.userId, result.email, result.name);
+          });
+        } else {
+          clearSession();
+        }
+      });
+    }
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row bg-[#0F1115] text-slate-200 font-sans">
+    <div className="min-h-screen flex flex-col md:flex-row bg-(--bg-app) text-slate-200 font-sans">
       {/* ── DESKTOP SIDEBAR ─────────────────────────────── */}
-      <nav className="hidden md:flex w-64 flex-col bg-[#16191F] border-r border-slate-800 sticky top-0 h-screen shrink-0">
+      <nav className="hidden md:flex w-64 flex-col bg-(--bg-nav) border-r border-slate-800 sticky top-0 h-screen shrink-0">
         <div className="p-8 flex items-center space-x-3">
-          <div className="w-8 h-8 bg-[#003580] rounded-lg flex items-center justify-center font-bold text-white shadow-lg">
-            F
+          <div className="w-8 h-8 rounded-lg overflow-hidden shadow-lg shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 11" className="w-full h-full">
+              <rect width="18" height="11" fill="#fff"/>
+              <rect x="4" y="0" width="3" height="11" fill="#003580"/>
+              <rect x="0" y="4" width="18" height="3" fill="#003580"/>
+            </svg>
           </div>
           <span className="text-xl font-semibold tracking-tight text-white">
             Learn Finnish
@@ -75,8 +105,8 @@ export default function App() {
             onClick={() => setShowPasscode(true)}
             className={`w-full flex items-center justify-between px-4 py-3 rounded-xl transition-colors font-medium ${isLoggedIn ? "bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-400 border border-indigo-500/30" : "bg-slate-800 hover:bg-slate-700 text-slate-300"}`}
           >
-            <span>{isLoggedIn ? "DB Synced" : "Sync to DB"}</span>
-            <Database size={18} />
+            <span>{isLoggedIn ? (userName ?? "Learner") : "Login"}</span>
+            {isLoggedIn ? <User size={18} /> : <LogIn size={18} />}
           </button>
           <button
             onClick={toggleTheme}
@@ -89,10 +119,14 @@ export default function App() {
       </nav>
 
       {/* ── MOBILE TOP BAR ──────────────────────────────── */}
-      <div className="md:hidden sticky top-0 z-20 flex items-center justify-between px-4 py-3 bg-[#16191F] border-b border-slate-800 shrink-0">
+      <div className="md:hidden sticky top-0 z-20 flex items-center justify-between px-4 py-3 bg-(--bg-nav) border-b border-slate-800 shrink-0">
         <div className="flex items-center space-x-3">
-          <div className="w-7 h-7 bg-[#003580] rounded-lg flex items-center justify-center font-bold text-white shadow-lg text-sm">
-            F
+          <div className="w-7 h-7 rounded-lg overflow-hidden shadow-lg shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 11" className="w-full h-full">
+              <rect width="18" height="11" fill="#fff"/>
+              <rect x="4" y="0" width="3" height="11" fill="#003580"/>
+              <rect x="0" y="4" width="18" height="3" fill="#003580"/>
+            </svg>
           </div>
           <span className="text-lg font-semibold tracking-tight text-white">
             Learn Finnish
@@ -102,7 +136,7 @@ export default function App() {
           onClick={() => setShowPasscode(true)}
           className={`p-2 transition-colors ${isLoggedIn ? "text-indigo-400" : "text-slate-400 hover:text-white active:text-white"}`}
         >
-          <Database size={22} />
+          {isLoggedIn ? <User size={22} /> : <LogIn size={22} />}
         </button>
         <button
           onClick={toggleTheme}
@@ -125,7 +159,7 @@ export default function App() {
       </main>
 
       {/* ── MOBILE BOTTOM NAV ───────────────────────────── */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-30 bg-[#16191F] border-t border-slate-800">
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-30 bg-(--bg-nav) border-t border-slate-800">
         <div className="flex">
           {navItems.map((item) => {
             const Icon = item.icon;

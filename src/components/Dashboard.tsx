@@ -7,7 +7,10 @@ export function Dashboard({
 }: {
   onNavigate: (tab: string) => void;
 }) {
-  const { xp, level, streak, wordsLearnedToday, unknownWordIds } = useAppStore();
+  const { xp, level, streak, wordsLearnedToday, unknownWordIds, userName } =
+    useAppStore();
+
+  const displayName = userName ?? "Learner";
 
   const xpForNextLevel = level * 100;
   const progress = ((xp % 100) / 100) * 100;
@@ -17,7 +20,9 @@ export function Dashboard({
       {/* Stats header */}
       <header className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 space-y-4 md:space-y-0">
         <div>
-          <h1 className="text-3xl font-bold text-white">Moi, Learner! 👋</h1>
+          <h1 className="text-3xl font-bold text-white">
+            Moi, {displayName}! 👋
+          </h1>
           <p className="text-slate-400">
             You're {xpForNextLevel - xp} XP away from reaching your next level.
           </p>
@@ -31,7 +36,7 @@ export function Dashboard({
           </div>
           <div className="w-12 h-12 rounded-full border-2 border-indigo-500 p-0.5">
             <div className="w-full h-full bg-slate-700 rounded-full flex items-center justify-center font-bold text-white text-lg">
-              L
+              {displayName[0].toUpperCase()}
             </div>
           </div>
         </div>
@@ -41,7 +46,7 @@ export function Dashboard({
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-[#1E232B] p-6 rounded-2xl border border-slate-700 flex items-center space-x-6"
+          className="bg-(--bg-card) p-6 rounded-2xl border border-slate-700 flex items-center space-x-6"
         >
           <div className="w-12 h-12 rounded-xl bg-orange-500/10 text-orange-400 flex items-center justify-center">
             <Flame size={24} strokeWidth={2.5} />
@@ -69,7 +74,7 @@ export function Dashboard({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.05 }}
-          className="bg-[#1E232B] p-6 rounded-2xl border border-slate-700 flex items-center space-x-6"
+          className="bg-(--bg-card) p-6 rounded-2xl border border-slate-700 flex items-center space-x-6"
         >
           <div className="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
             <BookCheck size={24} strokeWidth={2.5} />
@@ -86,7 +91,9 @@ export function Dashboard({
             <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
               <div
                 className="bg-emerald-400 h-full transition-all duration-500"
-                style={{ width: `${Math.min(100, (wordsLearnedToday / 50) * 100)}%` }}
+                style={{
+                  width: `${Math.min(100, (wordsLearnedToday / 50) * 100)}%`,
+                }}
               ></div>
             </div>
           </div>
@@ -96,7 +103,7 @@ export function Dashboard({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-[#1E232B] p-6 rounded-2xl border border-slate-700 flex items-center space-x-6"
+          className="bg-(--bg-card) p-6 rounded-2xl border border-slate-700 flex items-center space-x-6"
         >
           <div className="w-12 h-12 rounded-xl bg-red-500/10 text-red-400 flex items-center justify-center">
             <AlertCircle size={24} strokeWidth={2.5} />
@@ -113,7 +120,12 @@ export function Dashboard({
             <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
               <div
                 className="bg-red-400 h-full transition-all duration-500"
-                style={{ width: unknownWordIds.length > 0 ? `${Math.min(100, (unknownWordIds.length / 100) * 100)}%` : '0%' }}
+                style={{
+                  width:
+                    unknownWordIds.length > 0
+                      ? `${Math.min(100, (unknownWordIds.length / 100) * 100)}%`
+                      : "0%",
+                }}
               ></div>
             </div>
           </div>
@@ -123,7 +135,7 @@ export function Dashboard({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15 }}
-          className="bg-[#1E232B] p-6 rounded-2xl border border-slate-700 flex items-center space-x-6 md:col-span-3"
+          className="bg-(--bg-card) p-6 rounded-2xl border border-slate-700 flex items-center space-x-6 md:col-span-3"
         >
           <div className="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center shrink-0">
             <Star size={24} strokeWidth={2.5} />
@@ -151,7 +163,7 @@ export function Dashboard({
       </div>
 
       {/* Hero section */}
-      <div className="bg-linear-to-br from-[#1E293B] to-[#0F172A] p-8 rounded-4xl border border-slate-700 shadow-2xl flex items-center justify-between mb-10 overflow-hidden relative">
+      <div className="bg-(--bg-card) p-8 rounded-4xl border border-blue-700/50 shadow-2xl flex items-center justify-between mb-10 overflow-hidden relative">
         <div className="max-w-[70%] relative z-10">
           <span className="px-3 py-1 bg-blue-500/10 text-blue-400 text-xs font-bold rounded-full border border-blue-500/20 uppercase tracking-widest">
             Current Unit
@@ -166,7 +178,7 @@ export function Dashboard({
           </p>
           <button
             onClick={() => onNavigate("vocabulary")}
-            className="mt-8 px-8 py-3 bg-[#003580] hover:bg-blue-700 text-white font-bold rounded-2xl shadow-xl transition-all border border-blue-600/50"
+            className="mt-8 px-8 py-3 bg-[#003580] hover:bg-blue-700 !text-white font-bold rounded-2xl shadow-xl transition-all border border-blue-600/50"
           >
             Continue Lesson
           </button>
@@ -185,7 +197,7 @@ export function Dashboard({
           whileHover={{ y: -5 }}
           whileTap={{ scale: 0.98 }}
           onClick={() => onNavigate("vocabulary")}
-          className="bg-[#16191F] border border-slate-800 p-6 rounded-3xl hover:border-slate-700 transition-colors text-left flex flex-col cursor-pointer"
+          className="bg-(--bg-nav) border border-slate-800 p-6 rounded-3xl hover:border-slate-700 transition-colors text-left flex flex-col cursor-pointer"
         >
           <div className="w-12 h-12 bg-emerald-500/10 rounded-2xl flex items-center justify-center text-emerald-500 mb-4">
             <svg
@@ -212,7 +224,7 @@ export function Dashboard({
           whileHover={{ y: -5 }}
           whileTap={{ scale: 0.98 }}
           onClick={() => onNavigate("exercises")}
-          className="bg-[#16191F] border border-slate-800 p-6 rounded-3xl hover:border-slate-700 transition-colors text-left flex flex-col cursor-pointer"
+          className="bg-(--bg-nav) border border-slate-800 p-6 rounded-3xl hover:border-slate-700 transition-colors text-left flex flex-col cursor-pointer"
         >
           <div className="w-12 h-12 bg-purple-500/10 rounded-2xl flex items-center justify-center text-purple-500 mb-4">
             <svg
@@ -239,7 +251,7 @@ export function Dashboard({
           whileHover={{ y: -5 }}
           whileTap={{ scale: 0.98 }}
           onClick={() => onNavigate("pronunciation")}
-          className="bg-[#16191F] border border-slate-800 p-6 rounded-3xl hover:border-slate-700 transition-colors text-left flex flex-col cursor-pointer"
+          className="bg-(--bg-nav) border border-slate-800 p-6 rounded-3xl hover:border-slate-700 transition-colors text-left flex flex-col cursor-pointer"
         >
           <div className="w-12 h-12 bg-indigo-500/10 rounded-2xl flex items-center justify-center text-indigo-500 mb-4">
             <svg

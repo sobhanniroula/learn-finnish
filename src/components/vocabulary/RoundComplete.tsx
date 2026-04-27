@@ -42,7 +42,7 @@ export function RoundComplete({
         </button>
         <button
           onClick={onBack}
-          className="w-full py-4 rounded-2xl font-bold bg-[#16191F] text-slate-300 border border-slate-800 hover:bg-slate-800 active:bg-slate-700 transition text-base"
+          className="w-full py-4 rounded-2xl font-bold bg-(--bg-nav) text-slate-300 border border-slate-800 hover:bg-slate-800 active:bg-slate-700 transition text-base"
         >
           Back to Vocab
         </button>

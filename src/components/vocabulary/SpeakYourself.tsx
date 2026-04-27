@@ -122,7 +122,7 @@ export function SpeakYourself({ onBack }: { onBack: () => void }) {
         </motion.div>
       )}
 
-      <div className="bg-[#0F1115] p-8 sm:p-10 rounded-3xl border border-slate-800 text-center relative overflow-hidden">
+      <div className="bg-(--bg-app) p-8 sm:p-10 rounded-3xl border border-slate-800 text-center relative overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 bg-indigo-500/10 blur-3xl rounded-full pointer-events-none" />
         <div className="relative z-10 mb-8">
           <span className="text-xs font-bold tracking-widest text-[#003580] uppercase mb-3 inline-block border border-[#003580]/50 rounded-full px-3 py-1 bg-[#003580]/10">

@@ -1,24 +1,16 @@
 /**
- * db.ts — Supabase sync helpers
+ * db.ts — Supabase auth + sync helpers
  *
- * Table schema (run setup.sql once in your Supabase SQL editor):
+ * Auth: Email OTP (one-time code sent to user's email).
+ * No passwords — users enter their email, get a 6-digit code, enter it.
  *
- *   create table progress (
- *     passcode        text primary key,
- *     xp              integer not null default 0,
- *     level           integer not null default 1,
- *     streak          integer not null default 0,
- *     last_played     text,
- *     words_learned_today integer not null default 0,
- *     last_activity_date  text,
- *     daily_log       jsonb not null default '[]',
- *     unknown_word_ids integer[] not null default '{}',
- *     updated_at      timestamptz not null default now()
- *   );
+ * Supabase setup required:
+ *   Auth → Providers → Email → Enabled
+ *   (No other special config needed — OTP is on by default with email provider)
  */
 
-import { supabase } from './supabase';
-import type { DailyLog } from '../store';
+import { supabase } from "./supabase";
+import type { DailyLog } from "../store";
 
 export interface DbProgress {
   xp: number;
@@ -31,59 +23,148 @@ export interface DbProgress {
   unknownWordIds: number[];
 }
 
-type DbRow = {
-  passcode: string;
-  xp: number;
-  level: number;
-  streak: number;
-  last_played: string | null;
-  words_learned_today: number;
-  last_activity_date: string | null;
-  daily_log: DailyLog[];
-  unknown_word_ids: number[];
-};
+/** Send a 6-digit OTP code to the user's email. Returns true on success. */
+export async function sendLoginOtp(email: string): Promise<boolean> {
+  if (!supabase) return false;
+  const { error } = await supabase.auth.signInWithOtp({
+    email,
+    options: { shouldCreateUser: true },
+  });
+  if (error) {
+    console.error("[db] sendLoginOtp error", error);
+    return false;
+  }
+  return true;
+}
 
-function rowToProgress(row: DbRow): DbProgress {
+/** Verify the OTP code from the user's email. Returns { userId, email, name } on success. */
+export async function verifyLoginOtp(
+  email: string,
+  token: string,
+): Promise<{ userId: string; email: string; name: string | null } | null> {
+  if (!supabase) return null;
+  const { data, error } = await supabase.auth.verifyOtp({
+    email,
+    token,
+    type: "email",
+  });
+  if (error || !data.user) {
+    console.error("[db] verifyLoginOtp error", error);
+    return null;
+  }
+  const name =
+    (data.user.user_metadata?.full_name as string | undefined) ?? null;
+  return { userId: data.user.id, email: data.user.email!, name };
+}
+
+/** Update the display name stored in Supabase user metadata. */
+export async function updateUserName(name: string): Promise<void> {
+  if (!supabase) return;
+  await supabase.auth.updateUser({ data: { full_name: name } });
+}
+
+/** Sign out the current user from Supabase. */
+export async function signOut(): Promise<void> {
+  if (!supabase) return;
+  await supabase.auth.signOut();
+}
+
+/** Check for an existing Supabase session. Returns { userId, email, name } or null. */
+export async function getActiveSession(): Promise<{
+  userId: string;
+  email: string;
+  name: string | null;
+} | null> {
+  if (!supabase) return null;
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+  if (!session?.user) return null;
+  const name =
+    (session.user.user_metadata?.full_name as string | undefined) ?? null;
+  return { userId: session.user.id, email: session.user.email!, name };
+}
+
+/** Fetch progress for a user. Returns null if not found or Supabase unavailable. */
+export async function fetchProgress(
+  userId: string,
+): Promise<DbProgress | null> {
+  if (!supabase) return null;
+
+  const [{ data: prog, error }, { data: unk }] = await Promise.all([
+    supabase.from("progress").select("*").eq("user_id", userId).maybeSingle(),
+    supabase.from("unknown_words").select("word_id").eq("user_id", userId),
+  ]);
+
+  if (error) {
+    console.error("[db] fetchProgress error", error);
+    return null;
+  }
+
+  const unknownWordIds = (unk ?? []).map((r: { word_id: number }) => r.word_id);
+
+  if (!prog) {
+    // New user — no remote data yet
+    return {
+      xp: 0,
+      level: 1,
+      streak: 0,
+      lastPlayed: null,
+      wordsLearnedToday: 0,
+      lastActivityDate: null,
+      dailyLog: [],
+      unknownWordIds,
+    };
+  }
+
   return {
-    xp: row.xp,
-    level: row.level,
-    streak: row.streak,
-    lastPlayed: row.last_played,
-    wordsLearnedToday: row.words_learned_today,
-    lastActivityDate: row.last_activity_date,
-    dailyLog: row.daily_log ?? [],
-    unknownWordIds: row.unknown_word_ids ?? [],
+    xp: prog.xp,
+    level: prog.level,
+    streak: prog.streak,
+    lastPlayed: prog.last_played,
+    wordsLearnedToday: prog.words_learned_today,
+    lastActivityDate: prog.last_activity_date,
+    dailyLog: prog.daily_log ?? [],
+    unknownWordIds,
   };
 }
 
-/** Fetch progress for a passcode. Returns null if not found or supabase unavailable. */
-export async function fetchProgress(passcode: string): Promise<DbProgress | null> {
-  if (!supabase) return null;
-  const { data, error } = await supabase
-    .from('progress')
-    .select('*')
-    .eq('passcode', passcode)
-    .maybeSingle();
-  if (error) { console.error('[db] fetchProgress error', error); return null; }
-  if (!data) return null;
-  return rowToProgress(data as DbRow);
-}
-
-/** Upsert progress for a passcode. */
-export async function saveProgress(passcode: string, progress: DbProgress): Promise<boolean> {
+/** Save progress for a user (upsert). Returns true on success. */
+export async function saveProgress(
+  userId: string,
+  progress: DbProgress,
+): Promise<boolean> {
   if (!supabase) return false;
-  const { error } = await supabase.from('progress').upsert({
-    passcode,
-    xp: progress.xp,
-    level: progress.level,
-    streak: progress.streak,
-    last_played: progress.lastPlayed,
-    words_learned_today: progress.wordsLearnedToday,
-    last_activity_date: progress.lastActivityDate,
-    daily_log: progress.dailyLog,
-    unknown_word_ids: progress.unknownWordIds,
-    updated_at: new Date().toISOString(),
-  }, { onConflict: 'passcode' });
-  if (error) { console.error('[db] saveProgress error', error); return false; }
+
+  const { error } = await supabase.from("progress").upsert(
+    {
+      user_id: userId,
+      xp: progress.xp,
+      level: progress.level,
+      streak: progress.streak,
+      last_played: progress.lastPlayed,
+      words_learned_today: progress.wordsLearnedToday,
+      last_activity_date: progress.lastActivityDate,
+      daily_log: progress.dailyLog,
+      updated_at: new Date().toISOString(),
+    },
+    { onConflict: "user_id" },
+  );
+
+  if (error) {
+    console.error("[db] saveProgress error", error);
+    return false;
+  }
+
+  // Replace unknown words
+  await supabase.from("unknown_words").delete().eq("user_id", userId);
+  if (progress.unknownWordIds.length > 0) {
+    await supabase
+      .from("unknown_words")
+      .insert(
+        progress.unknownWordIds.map((id) => ({ user_id: userId, word_id: id })),
+      );
+  }
+
   return true;
 }

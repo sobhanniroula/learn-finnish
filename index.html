@@ -8,6 +8,20 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      try {
+        var s = JSON.parse(
+          localStorage.getItem("learn-finnish-progress") || "{}",
+        );
+        if (s && s.state && s.state.theme !== "light") {
+          document.documentElement.classList.add("dark");
+        } else if (!s || !s.state) {
+          document.documentElement.classList.add("dark");
+        }
+      } catch (e) {
+        document.documentElement.classList.add("dark");
+      }
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -22,7 +22,10 @@ interface AppState {
 
   // ── auth ──────────────────────────────────────────────
   isLoggedIn: boolean;
-  passcode: string | null;
+  userId: string | null;           // runtime only — from Supabase session
+  userEmail: string | null;        // runtime only — display purposes
+  userName: string | null;         // runtime only — display name
+  sessionExpiresAt: number | null; // persisted — used to restore session on reload
 
   // ── actions ───────────────────────────────────────────
   toggleTheme: () => void;
@@ -31,7 +34,12 @@ interface AppState {
   recordWordLearned: () => void;
   markUnknown: (id: number) => void;
   unmarkUnknown: (id: number) => void;
-  setLoggedIn: (passcode: string) => void;
+  setLoggedIn: (
+    userId: string,
+    userEmail: string,
+    userName: string | null,
+  ) => void;
+  clearSession: () => void;
   logout: () => void;
   /** Bulk-load state from Supabase (replaces current progress) */
   hydrateFromDb: (data: {
@@ -61,7 +69,10 @@ export const useAppStore = create<AppState>()(
       unknownWordIds: [],
       theme: "dark",
       isLoggedIn: false,
-      passcode: null,
+      userId: null,
+      userEmail: null,
+      userName: null,
+      sessionExpiresAt: null,
 
       toggleTheme: () =>
         set((state) => {
@@ -120,9 +131,32 @@ export const useAppStore = create<AppState>()(
           unknownWordIds: state.unknownWordIds.filter((x) => x !== id),
         })),
 
-      setLoggedIn: (passcode) => set({ isLoggedIn: true, passcode }),
+      setLoggedIn: (userId, userEmail, userName) =>
+        set({
+          isLoggedIn: true,
+          userId,
+          userEmail,
+          userName,
+          sessionExpiresAt: Date.now() + 7 * 24 * 60 * 60 * 1000,
+        }),
 
-      logout: () => set({ isLoggedIn: false, passcode: null }),
+      clearSession: () =>
+        set({
+          isLoggedIn: false,
+          userId: null,
+          userEmail: null,
+          userName: null,
+          sessionExpiresAt: null,
+        }),
+
+      logout: () =>
+        set({
+          isLoggedIn: false,
+          userId: null,
+          userEmail: null,
+          userName: null,
+          sessionExpiresAt: null,
+        }),
 
       hydrateFromDb: (data) =>
         set({
@@ -149,6 +183,7 @@ export const useAppStore = create<AppState>()(
         dailyLog: state.dailyLog,
         unknownWordIds: state.unknownWordIds,
         theme: state.theme,
+        sessionExpiresAt: state.sessionExpiresAt,
       }),
     },
   ),

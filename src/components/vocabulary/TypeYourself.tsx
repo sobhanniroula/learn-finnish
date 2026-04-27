@@ -14,7 +14,8 @@ export function TypeYourself({ onBack }: { onBack: () => void }) {
   const [result, setResult] = useState<"correct" | "wrong" | null>(null);
   const [score, setScore] = useState(0);
   const [roundScore, setRoundScore] = useState<number | null>(null);
-  const { addXp, recordWordLearned, markUnknown, unmarkUnknown } = useAppStore();
+  const { addXp, recordWordLearned, markUnknown, unmarkUnknown } =
+    useAppStore();
 
   const word = words[idx];
 
@@ -23,7 +24,7 @@ export function TypeYourself({ onBack }: { onBack: () => void }) {
     setResult(correct ? "correct" : "wrong");
     if (correct) {
       setScore((s) => s + 1);
-      addXp(12);
+      addXp(1);
       recordWordLearned();
       unmarkUnknown(word.id);
     } else {
@@ -75,7 +76,7 @@ export function TypeYourself({ onBack }: { onBack: () => void }) {
         </span>
         <span>Score: {score}</span>
       </div>
-      <div className="relative bg-[#1E232B] p-6 sm:p-8 rounded-4xl border border-slate-700 shadow-2xl">
+      <div className="relative bg-(--bg-card) p-6 sm:p-8 rounded-4xl border border-slate-700 shadow-2xl">
         <SourceBadge source={word.source} />
         <p className="text-xs font-bold text-slate-500 uppercase tracking-widest text-center mb-3">
           Translate to English
@@ -98,7 +99,7 @@ export function TypeYourself({ onBack }: { onBack: () => void }) {
           }}
           placeholder="Type the English translation…"
           disabled={!!result}
-          className={`w-full px-5 py-4 rounded-2xl border text-base font-medium bg-[#0F1115] outline-none transition-colors ${
+          className={`w-full px-5 py-4 rounded-2xl border text-base font-medium bg-(--bg-app) outline-none transition-colors ${
             result === "correct"
               ? "border-emerald-500 text-emerald-400"
               : result === "wrong"

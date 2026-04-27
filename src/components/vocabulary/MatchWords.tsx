@@ -67,7 +67,7 @@ function MatchRound({
           </button>
           <button
             onClick={onBack}
-            className="w-full py-4 rounded-2xl font-bold bg-[#16191F] text-slate-300 border border-slate-800 hover:bg-slate-800 active:bg-slate-700 transition"
+            className="w-full py-4 rounded-2xl font-bold bg-(--bg-nav) text-slate-300 border border-slate-800 hover:bg-slate-800 active:bg-slate-700 transition"
           >
             Back to Vocab
           </button>
@@ -101,7 +101,7 @@ function MatchRound({
                       ? "bg-[#003580] border-blue-500 text-white"
                       : isWrong
                         ? "bg-red-500/20 border-red-500/50 text-red-400"
-                        : "bg-[#1E232B] border-slate-700 text-white hover:border-slate-500 active:border-slate-400"
+                        : "bg-(--bg-card) border-slate-700 text-white hover:border-slate-500 active:border-slate-400"
                 }`}
               >
                 {w.finnish}
@@ -126,8 +126,8 @@ function MatchRound({
                     : isWrong
                       ? "bg-red-500/20 border-red-500/50 text-red-400"
                       : selectedFiIdx !== null
-                        ? "bg-[#1E232B] border-slate-600 text-white hover:border-blue-500 active:border-blue-400 cursor-pointer"
-                        : "bg-[#1E232B] border-slate-700 text-slate-400 cursor-default"
+                        ? "bg-(--bg-card) border-slate-600 text-white hover:border-blue-500 active:border-blue-400 cursor-pointer"
+                        : "bg-(--bg-card) border-slate-700 text-slate-400 cursor-default"
                 }`}
               >
                 {w.english}

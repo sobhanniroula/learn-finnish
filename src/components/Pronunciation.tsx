@@ -107,7 +107,7 @@ Provide a brief 1-2 sentence feedback on what they did well and one thing to imp
         </p>
       </div>
 
-      <div className="bg-[#0F1115] p-10 rounded-3xl border border-slate-800 text-center relative overflow-hidden">
+      <div className="bg-(--bg-app) p-10 rounded-3xl border border-slate-800 text-center relative overflow-hidden">
         {/* Decorative glow */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 bg-indigo-500/10 blur-3xl rounded-full pointer-events-none" />
 
